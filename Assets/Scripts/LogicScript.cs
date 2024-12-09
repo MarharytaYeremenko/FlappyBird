@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
+using UnityEditor.PackageManager;
+using System.Linq.Expressions;
 
 public class LogicScript : MonoBehaviour
 {
@@ -15,7 +17,7 @@ public class LogicScript : MonoBehaviour
     private AudioSource audioBirdDies;
     public bool birdIsAlive = true;
     private bool hasPlayed = false;
-
+    
 
     [ContextMenu("Increase Score")]
 
@@ -66,13 +68,25 @@ public class LogicScript : MonoBehaviour
             playerScore = playerScore + scoreToAdd;
             scoreText.text = playerScore.ToString();
             PlayScoreSound();
+            
         }
         else
         {
             Debug.Log("Cannot add score. Bird is not alive.");
         }
+        newLevel();
     }
-
+    public void loadnewLevel(string scenename)
+    {
+        SceneManager.LoadScene(scenename);
+    }
+    public void newLevel()
+    {
+        if(birdIsAlive && playerScore == 2)
+        {
+            loadnewLevel("NewScene");
+        }
+    }
 public void restartGame()
     {
         StartCoroutine(RestartAfterSound());
