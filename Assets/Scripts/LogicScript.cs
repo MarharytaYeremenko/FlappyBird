@@ -81,7 +81,7 @@ public class LogicScript : MonoBehaviour
     }
     public void newLevel()
     {
-        if(birdIsAlive && playerScore == 2)
+        if(birdIsAlive && playerScore == 100)
         {
             loadnewLevel("NewScene");
         }
